@@ -7,7 +7,7 @@ typedef uint32_t Shader;
 
 Shader ShaderCreateFromFiles(const char* fragShaderFilePath, const char* vertShaderFilePath);
 Shader ShaderCreateFromStrings(const char* fragShaderSource, const char* vertShaderSource);
-void UseShader(Shader shader);
+void ShaderUse(Shader shader);
 void ShaderDestory(Shader shader);
 
 #endif

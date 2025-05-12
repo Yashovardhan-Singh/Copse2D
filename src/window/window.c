@@ -1,6 +1,6 @@
+#include "../../vendor/glad/gl.h"
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "window.h"
 #include "../../vendor/tomlc/toml.h"
@@ -10,6 +10,18 @@ struct Window {
     const char* title;
     uint32_t width, height;
 };
+
+static void _framebuffer_size_callback(GLFWwindow* glfw_win, int width, int height) {
+    // Retrieve the Window struct from the user pointer
+    Window* win = (Window*)glfwGetWindowUserPointer(glfw_win);
+
+    // Update width and height
+    win->width = (uint32_t)width;
+    win->height = (uint32_t)height;
+
+    // Update the OpenGL viewport
+    glViewport(0, 0, width, height);
+}
 
 // Refactor this shit
 Window* WindowInit(uint32_t width, uint32_t height, const char* title, const char* settingsFilePath) {
@@ -30,8 +42,10 @@ Window* WindowInit(uint32_t width, uint32_t height, const char* title, const cha
         if (toml_bool_in(display, "borderless").u.b != 0) glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
         if (toml_bool_in(display, "cursor").u.b == 0) glfwWindowHint(GLFW_CURSOR, GLFW_FALSE);
         if (toml_bool_in(display, "fullscreen").u.b != 0) fullscreen = 1;
+
+        toml_free(root);
     }
-    
+
     glfwInit();
 
     win->width = width;
@@ -43,7 +57,13 @@ Window* WindowInit(uint32_t width, uint32_t height, const char* title, const cha
     else
         win->handle = glfwCreateWindow(width, height, title, NULL, NULL);
 
+    glfwSetWindowUserPointer(win->handle, win);
+    glfwSetFramebufferSizeCallback(win->handle, _framebuffer_size_callback);
+
     glfwMakeContextCurrent(win->handle);
+    gladLoadGL(glfwGetProcAddress);
+
+    glViewport(0, 0, win->width, win->height);
 
     return win;
 }

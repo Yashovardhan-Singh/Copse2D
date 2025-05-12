@@ -2,7 +2,7 @@
 #define COLOR_H
 
 typedef struct Color {
-    float r, g, b;
+    float r, g, b, a;
 } Color;
 
 #endif

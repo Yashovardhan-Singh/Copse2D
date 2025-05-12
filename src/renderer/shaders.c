@@ -11,7 +11,7 @@ typedef uint32_t Shader;
 const char* _ShaderReadSourceFromFile(const char* filePath) {
     FILE *file = fopen(filePath, "r");
     if (!file) {
-        fprintf("Cannot open file as read: %s\n", filePath);
+        fprintf(stderr, "Cannot open file as read: %s\n", filePath);
         return NULL;
     }
 
@@ -103,7 +103,7 @@ Shader ShaderCreateFromStrings(const char* fragShaderSource, const char* vertSha
     return shaderProgram;
 }
 
-void UseShader(Shader shader) {
+void ShaderUse(Shader shader) {
     glUseProgram(shader);
 }
 

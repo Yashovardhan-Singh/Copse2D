@@ -1,5 +1,5 @@
 glad_sources = files(
-    'toml.c',
+    'gl.c',
 )
 
 glad_includes = include_directories(

@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include "vertex.h"
 
 typedef struct RenderBatch {
     float *VBOdata;
@@ -12,6 +13,10 @@ typedef struct RenderBatch {
 } RenderBatch;
 
 RenderBatch RenderBatchInit();
+uint8_t RenderBatchCheckCapacity(RenderBatch* rb);
+void RenderBatchAddVertex(RenderBatch* rb, Vertex vertex);
+void RenderBatchUpdateQuadIndices(RenderBatch* rb);
+void RenderBatchReset(RenderBatch* rb);
 void RenderBatchDestroy(RenderBatch* rb);
 
 #endif

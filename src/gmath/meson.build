@@ -1,5 +1,9 @@
 gmath_sources = files(
     'vector.c',
+    'timing.c',
+    'matrix.c',
+    'geometry.c',
+    'coordinates.c'
 )
 
 gmath_includes = include_directories(
