@@ -9,7 +9,8 @@ typedef struct Texture {
     uint32_t channels;
 } Texture;
 
-Texture TextureCreate(const char* filename);
-void TextureDestroy(Texture texture);
+Texture TextureCreate(const char* filename);    // Binds the texture created
+void TextureBind(Texture tex);
+void TextureDestroy(Texture tex);
 
 #endif //TEXTURE_H

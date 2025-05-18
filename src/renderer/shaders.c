@@ -104,7 +104,14 @@ Shader ShaderCreateFromStrings(const char* fragShaderSource, const char* vertSha
 }
 
 void ShaderUse(Shader shader) {
+    GLint boundTexture = 0;
+    glGetIntegerv(GL_TEXTURE_BINDING_2D, &boundTexture);
     glUseProgram(shader);
+    if (boundTexture) {
+        glUniform1i(glGetUniformLocation(shader, "useTexture"), GL_TRUE);
+    } else {
+        glUniform1i(glGetUniformLocation(shader, "useTexture"), GL_FALSE);
+    }
 }
 
 void ShaderDestory(Shader shader) {

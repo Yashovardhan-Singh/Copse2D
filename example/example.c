@@ -1,36 +1,42 @@
 #include "../src/window/window.h"
 #include "../src/renderer/renderer.h"
-#include <stdio.h>
 
-#include "gl.h"
-
-#define NULL ((void*)0)
+#define DEG2RAD 0.01745329251   // Debug constant
 
 int main() {
+
     Window* w = WindowInit(1280, 720, "Test", NULL);
-    Texture t = TextureCreate("../example/test.png");
     RenderContext* rctx = RenderContextInit();
+
+    Texture t = TextureCreate("../example/test.png");   // Binds texture too
+    Texture t2 = TextureCreate("../example/test.jpg");
+
+    TextureBind(t);
+
     RObject o = (RObject) {
-        .x1 = 0.0, .y1 = 0.0, .x2 = 1.0, .y2 = 1.0,
-        .u1 = 0.0, .u2 = 0.0, .v1 = 1.0, .v2 = 1.0,
-        .color = (Color) { 1.0, 1.0, 1.0, 1.0 },
-        .tex = t
+        .x = -0.5, .y = -0.5,
+        .w = 1.0, .h = 1.0,
+        .u = 0.0, .v = 0.0,
+        .tw = 1.0, .th = 1.0,
+        .color = WHITE,
+        .scaleX = 1.0, .scaleY = 1.0,
+        .rotation = 0 * DEG2RAD,
     };
-    RObject o2 = (RObject) {
-        .x1 = -1.0, .y1 = -1.0, .x2 = 0.0, .y2 = 0.0,
-        .u1 = 0.0, .u2 = 0.0, .v1 = 1.0, .v2 = 1.0,
-        .color = (Color) { 0.5, 0.5, 0.5, 1.0 },
-        .tex = t
-    };
-    int fc = 0;
+
     while (!WindowCloseEvent(w)) {
-        glClearColor(0.0, 0.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
-        DrawObject(rctx, &o);
-        DrawObject(rctx, &o2);
+        o.rotation += DEG2RAD * 1.0;
+
+        RendererStartFrame((Color) {0.0, 0.0, 0.0, 1.0});
+            RendererDrawObject(rctx, &o);
+        RendererStopFrame(rctx);
+
         WindowRefresh(w);
     }
+
     TextureDestroy(t);
+    TextureDestroy(t2);
+
     RenderContextDestroy(rctx);
+
     return 0;
 }

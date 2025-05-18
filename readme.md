@@ -95,7 +95,7 @@ For questions, issues, or feedback:
 GitHub Issues: https://github.com/Yashovardhan-Singh/Copse2D/issues
 Email: yashovardhansingh08@gmail.com
 
-Acknowledgments
+## Acknowledgments
 Copse2D builds on the work of the open-source community. Special thanks to:
 
 Sean Barrett for stb_image.

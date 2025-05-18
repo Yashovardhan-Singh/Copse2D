@@ -10,17 +10,23 @@
 
 typedef struct RenderableObject {
     // Texture data
-    Texture tex;
-    float u1, v1;
-    float u2, v2;
+    float u, v;
+    float tw, th;
 
-    // Position data
-    float x1, y1; // origin
-    float x2, y2; // x2 = x1 + w, y2 = y1 + h
+    // Dimension data
+    float w, h;
+
+    // Transform Data
+    float x, y;
+    float scaleX, scaleY;
+    float rotation; // radians
+
     // Color data
     Color color;
 } RObject;
 
-void DrawObject(RenderContext* context, RObject* object);
+void RendererStartFrame(Color color);
+void RendererDrawObject(RenderContext* context, RObject* object);
+void RendererStopFrame(RenderContext* context);
 
 #endif

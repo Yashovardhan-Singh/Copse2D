@@ -25,10 +25,16 @@ static const char* defaultFragShader = "#version 330 core\n\
     in vec2 vTexCoord;\n\
     in vec4 vColor;\n\
     uniform sampler2D uTexture;\n\
+    uniform bool useTexture;\n\
     out vec4 FragColor;\n\
     void main() {\n\
-        FragColor = texture(uTexture, vTexCoord) * vColor;\n\
+        if (useTexture) {\n\
+            FragColor = texture(uTexture, vTexCoord) * vColor;\n\
+        } else {\n\
+            FragColor = vColor;\n\
+        }\n\
     }";
+
 
 // static const char* defaultFragShader = "#version 330 core\n\
 //     out vec4 FragColor;\n\

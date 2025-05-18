@@ -20,10 +20,10 @@ static void _framebuffer_size_callback(GLFWwindow* glfw_win, int width, int heig
     win->height = (uint32_t)height;
 
     // Update the OpenGL viewport
-    glViewport(0, 0, width, height);
+    glViewport(0, 0, win->width, win->height);
 }
 
-// Refactor this shit
+// TODO: Refactor this shit
 Window* WindowInit(uint32_t width, uint32_t height, const char* title, const char* settingsFilePath) {
     Window* win = calloc(1, sizeof(Window));
 
