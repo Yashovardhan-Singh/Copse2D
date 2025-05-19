@@ -1,23 +1,36 @@
-project('Copse2D', 'c',
+project(
+  'Copse2D', 'c',
   version: '0.1.0',
-  default_options: ['c_std=c11']
+  default_options: [
+    'c_std=c11',
+    'default_library=both'
+  ],
 )
 
 cc = meson.get_compiler('c')
-
-subdir('src/window')
-subdir('src/renderer')
-subdir('src/gmath')
 
 subdir('vendor/tomlc')
 subdir('vendor/glad')
 subdir('vendor/stb_image')
 
+subdir('src')
+
 glfw = dependency('glfw3', required: true)
 math = cc.find_library('m')
 
-executable(
-  'example',
-  'example/example.c',
-  dependencies: [window, renderer, math, stb_image, tomlc, glad, glfw]
+Copse2D_deps = [
+  glad,
+  stb_image,
+  tomlc,
+  glfw,
+  math
+]
+
+Copse2D = library(
+  'Copse2D',
+  Copse2D_sources,
+  include_directories: Copse2D_includes,
+  dependencies: Copse2D_deps
 )
+
+subdir('example')

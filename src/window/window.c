@@ -55,15 +55,18 @@ Window* WindowInit(uint32_t width, uint32_t height, const char* title, const cha
     if (fullscreen)
         win->handle = glfwCreateWindow(width, height, title, glfwGetPrimaryMonitor(), NULL);
     else
-        win->handle = glfwCreateWindow(width, height, title, NULL, NULL);
+        win->handle = glfwCreateWindow(win->width, win->height, win->title, NULL, NULL);
+
+    glfwMakeContextCurrent(win->handle);
 
     glfwSetWindowUserPointer(win->handle, win);
     glfwSetFramebufferSizeCallback(win->handle, _framebuffer_size_callback);
 
-    glfwMakeContextCurrent(win->handle);
     gladLoadGL(glfwGetProcAddress);
 
-    glViewport(0, 0, win->width, win->height);
+    int fbWidth, fbHeight;
+    glfwGetFramebufferSize(win->handle, &fbWidth, &fbHeight);
+    glViewport(0, 0, fbWidth, fbHeight);
 
     return win;
 }

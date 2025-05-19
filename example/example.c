@@ -5,11 +5,11 @@
 
 int main() {
 
-    Window* w = WindowInit(1280, 720, "Test", NULL);
+    Window* w = WindowInit(800, 800, "Test", NULL);
     RenderContext* rctx = RenderContextInit();
 
-    Texture t = TextureCreate("../example/test.png");   // Binds texture too
-    Texture t2 = TextureCreate("../example/test.jpg");
+    Texture t = TextureCreate("../../example/assets/test.png");   // Binds texture too
+    Texture t2 = TextureCreate("../../example/assets/test.jpg");
 
     TextureBind(t);
 
@@ -23,10 +23,13 @@ int main() {
         .rotation = 0 * DEG2RAD,
     };
 
+    Shader cs = ShaderCreateFromFiles("../../example/shaders/efrag.glsl", "../../example/shaders/evert.glsl");
+    rctx->shader = cs;
+
     while (!WindowCloseEvent(w)) {
         o.rotation += DEG2RAD * 1.0;
 
-        RendererStartFrame((Color) {0.0, 0.0, 0.0, 1.0});
+        RendererStartFrame(WHITE);
             RendererDrawObject(rctx, &o);
         RendererStopFrame(rctx);
 

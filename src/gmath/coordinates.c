@@ -1,4 +1,5 @@
 #include "coordinates.h"
+#include <math.h>
 
 Point2D PolarToCartesian(Polar p) {
     return (Point2D) {
@@ -13,12 +14,6 @@ Polar CartesianToPolar(Point2D p) {
         .theta = atan2f(p.y, p.x)
     };
 }
-
-typedef struct Camera2D {
-    Point2D position;
-    float zoom;
-    Vec2 screensize;
-} Cam2D;
 
 Point2D ScreenToWorld(Point2D screenPos, Cam2D cam) {
     Vec2 halfScreen = { cam.screensize.x * 0.5, cam.screensize.y * 0.5 };

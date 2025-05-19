@@ -61,7 +61,7 @@ int32_t RayIntersectsLine(Ray ray, LineSeg line, float* outT) {
     
     // Find the intersection point along the line
     Vec2 intersection = RayAt(ray, *outT);
-    return lineContainsPoint(line, intersection);
+    return LineContainsPoint(line, intersection);
 }
 
 int32_t RayIntersectsBox(Ray ray, BBox box, float* outT) {

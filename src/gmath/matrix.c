@@ -1,4 +1,5 @@
 #include "matrix.h"
+#include <math.h>
 
 Point2D Translate(Point2D point, Point2D displacement) {
     return (Point2D){ point.x + displacement.x, point.y + displacement.y };
