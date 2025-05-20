@@ -1,5 +1,8 @@
 #include "../src/window/window.h"
 #include "../src/renderer/renderer.h"
+#include "../src/input/input.h"
+
+#include <stdio.h>
 
 #define DEG2RAD 0.01745329251   // Debug constant
 
@@ -15,7 +18,7 @@ int main() {
 
     RObject o = (RObject) {
         .x = -0.5, .y = -0.5,
-        .w = 1.0, .h = 1.0,
+        .w = 0.1, .h = 0.1,
         .u = 0.0, .v = 0.0,
         .tw = 1.0, .th = 1.0,
         .color = WHITE,
@@ -28,6 +31,30 @@ int main() {
 
     while (!WindowCloseEvent(w)) {
         o.rotation += DEG2RAD * 1.0;
+
+        if (InputKeyState(WindowGetHandle(w), KEY_F)) {
+            fprintf(stderr, "Holy shit\n");
+        }
+
+        if (InputKeyState(WindowGetHandle(w), KEY_ESCAPE)) {
+            break;
+        }
+
+        if (InputKeyState(WindowGetHandle(w), KEY_W)) {
+            o.y += 0.01;
+        }
+
+        if (InputKeyState(WindowGetHandle(w), KEY_A)) {
+            o.x -= 0.01;
+        }
+
+        if (InputKeyState(WindowGetHandle(w), KEY_S)) {
+            o.y -= 0.01;
+        }
+
+        if (InputKeyState(WindowGetHandle(w), KEY_D)) {
+            o.x += 0.01;
+        }
 
         RendererStartFrame(WHITE);
             RendererDrawObject(rctx, &o);

@@ -71,6 +71,10 @@ Window* WindowInit(uint32_t width, uint32_t height, const char* title, const cha
     return win;
 }
 
+void* WindowGetHandle(Window* window) {
+    return window->handle;
+}
+
 uint32_t WindowCloseEvent(Window* window) {
     return glfwWindowShouldClose(window->handle);
 }
