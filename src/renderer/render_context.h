@@ -5,11 +5,13 @@
 #include "render_batch.h"
 #include "shaders.h"
 #include "dshaders.h"
+#include "camera.h"
 
 typedef struct RenderContext {
     RenderObjects renderer;
     RenderBatch batch;
     Shader shader;
+    Camera2D camera;
 } RenderContext;
 
 RenderContext* RenderContextInit();

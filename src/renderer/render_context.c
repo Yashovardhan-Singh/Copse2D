@@ -7,6 +7,7 @@ RenderContext* RenderContextInit() {
     rc->batch = RenderBatchInit();
     rc->renderer = RenderObjectsInit();
     rc->shader = ShaderCreateFromStrings(defaultFragShader, defaultVertShader);
+    rc->camera = CameraInit();
     return rc;
 }
 

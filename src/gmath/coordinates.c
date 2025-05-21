@@ -17,7 +17,7 @@ Polar CartesianToPolar(Point2D p) {
 
 Point2D ScreenToWorld(Point2D screenPos, Cam2D cam) {
     Vec2 halfScreen = { cam.screensize.x * 0.5, cam.screensize.y * 0.5 };
-    
+
     return (Point2D) {
         .x = (screenPos.x - halfScreen.x) / cam.zoom + cam.position.x,
         .y = (screenPos.y - halfScreen.y) / cam.zoom + cam.position.y
@@ -26,7 +26,7 @@ Point2D ScreenToWorld(Point2D screenPos, Cam2D cam) {
 
 Vec2 WorldToScreen(Point2D worldPos, Cam2D cam) {
     Vec2 halfScreen = { cam.screensize.x * 0.5, cam.screensize.y * 0.5 };
-    
+
     return (Vec2) {
         .x = (worldPos.x - cam.position.x) * cam.zoom + halfScreen.x,
         .y = (worldPos.y - cam.position.y) * cam.zoom + halfScreen.y

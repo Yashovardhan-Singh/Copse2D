@@ -4,7 +4,8 @@ renderer_sources = files(
     'shaders.c',
     'render_objects.c',
     'render_context.c',
-    'render_batch.c'
+    'render_batch.c',
+    'camera.c'
 )
 
 renderer_includes = include_directories(

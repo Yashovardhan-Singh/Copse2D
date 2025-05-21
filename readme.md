@@ -1,5 +1,12 @@
 # Copse2D
-Copse2D is a custom OpenGL game framework library designed to simplify the development of OpenGL-based games and applications. Developed by Yashovardhan-Singh, this library provides tools for window management, texture loading, configuration parsing, and OpenGL rendering, leveraging modern C programming practices.  
+Copse2D is a custom OpenGL game framework library designed to simplify the development of OpenGL-based games and applications.
+This library provides tools for window management, texture loading, configuration parsing,  and OpenGL rendering, leveraging
+modern C programming practices.  
+Upon examining the source code, you may be surprised by some redundant code, however that is by design, each subdirectory in the
+source is meant to be completely independent of the project, in case I want to swap it out with a different solution or rewrite
+the entire code.  
+Designing it this way also allows anyone to just take parts of this library they want, and include it in their own.
+
 
 ## Features
 * **Window Management**: Easy-to-use window creation and event handling with GLFW.

@@ -29,13 +29,9 @@ int main() {
     Shader cs = ShaderCreateFromFiles("../../example/shaders/efrag.glsl", "../../example/shaders/evert.glsl");
     rctx->shader = cs;
 
+    rctx->camera.zoom = 0.3;
+
     while (!WindowCloseEvent(w)) {
-        o.rotation += DEG2RAD * 1.0;
-
-        if (InputKeyState(WindowGetHandle(w), KEY_F)) {
-            fprintf(stderr, "Holy shit\n");
-        }
-
         if (InputKeyState(WindowGetHandle(w), KEY_ESCAPE)) {
             break;
         }
@@ -55,6 +51,8 @@ int main() {
         if (InputKeyState(WindowGetHandle(w), KEY_D)) {
             o.x += 0.01;
         }
+
+        o.rotation += DEG2RAD * 1.0;
 
         RendererStartFrame(WHITE);
             RendererDrawObject(rctx, &o);
